@@ -1,5 +1,6 @@
 package databases;
 
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
@@ -21,7 +22,7 @@ public class ConnectToMongoDB {
     public static MongoDatabase mongoDatabase = null;
 
     public static MongoDatabase connectToMongoDB() {
-        MongoClient mongoClient = new MongoClient();
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
         mongoDatabase = mongoClient.getDatabase("students");
         System.out.println("Database Connected");
 
@@ -35,7 +36,7 @@ public class ConnectToMongoDB {
         Document document = new Document().append("stName",user.getStName()).append("stID", user.getStID()).
                 append("stDOB",user.getStDOB());
         collection.insertOne(document);
-        return profile + " has been registered";
+        return (profile + " has been registered");
     }
 
     public String insertIntoMongoDB(List<Student> student,String profileName){
@@ -71,6 +72,7 @@ public class ConnectToMongoDB {
             user.setStID(stDOB);
             user = new User(stName,stID,stDOB);
             list.add(user);
+            System.out.println(doc);
         }
         return list;
     }
@@ -98,7 +100,9 @@ public class ConnectToMongoDB {
     }
 
     public static void main(String[] args){
-        insertIntoToMongoDB(new User("Naomi Chan", "4493","07-1996"));
+      // insertIntoToMongoDB(new User("Naomi Chan", "4493","07-1996"));
+       // insertIntoToMongoDB(new User("Keanu Reeves", "1234","09-1964"));
+
         List<User> user = readUserProfileFromMongoDB();
         for(User person:user){
             System.out.println(person.getStName()+ " "+ person.getStID());
