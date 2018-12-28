@@ -2,6 +2,7 @@ package math.problems;
 
 import java.util.Scanner;
 
+
 /**
  * Created by mrahman on 04/02/18.
  */
