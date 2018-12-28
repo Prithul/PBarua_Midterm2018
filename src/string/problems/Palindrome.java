@@ -13,6 +13,8 @@ public class Palindrome {
      */
     public static void main(String args[]) {
 
+        // .............................. way #1 ............................
+
         String original;
         String reverse = "";
         Scanner in = new Scanner(System.in);
@@ -30,6 +32,21 @@ public class Palindrome {
         else
             System.out.println("The string isn't a palindrome.");
 
+        // ................... way #2 ==> For Unit Test .......................
+
+        String str = "MOM";
+        boolean b = isPalindrome(str);
+        System.out.println("Is it Palindrome? : " + b);
+
     }
 
+    public static boolean isPalindrome(String input) {
+        int n = input.length();
+        for (int i = 0; i < (n / 2); ++i) {
+            if (input.charAt(i) != input.charAt(n - i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
