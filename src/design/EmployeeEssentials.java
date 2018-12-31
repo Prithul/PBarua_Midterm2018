@@ -10,7 +10,7 @@ public abstract class EmployeeEssentials implements Employee {
     private String DOB;
 
     final double medical = 15000.00;
-    final double tution_Reimbursement = 15000.00;
+    final double tuition_Reimbursement = 15000.00;
     final String Sick_Leave = "5 days";
     final String Paid_Holidays = "10 days";
 

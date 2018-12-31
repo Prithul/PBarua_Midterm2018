@@ -64,6 +64,15 @@ public class EmployeeInfo extends EmployeeEssentials{
 		this.rate = rate;
 	}
 
+	public EmployeeInfo(int employeeId, String employeeName, String employeeDepartNumber){      /*  Constructor 4  */
+
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.employeeDepartmentNumber = employeeDepartNumber;
+		this.hrs = hrs;
+		this.rate = rate;
+	}
+
 
 	//employeeId() will return employee id....method() override
 	public int employeeId(){
@@ -102,7 +111,7 @@ public class EmployeeInfo extends EmployeeEssentials{
 
 		System.out.println("Paid_Holidays: " + super.Paid_Holidays);
 
-		System.out.println("tution_Reimbursement: $" + super.tution_Reimbursement);
+		System.out.println("tuition_Reimbursement: $" + super.tuition_Reimbursement);
 
 		double totalLifeInsurance =  Life_Insurance(totalSalary);
 		System.out.println("LifeInsurance: $" + totalLifeInsurance);
@@ -185,9 +194,9 @@ public class EmployeeInfo extends EmployeeEssentials{
 		double pension = 0.0 ;
 
 		Scanner sc  = new Scanner(System.in);
-		System.out.println("\nPlease enter start date in format (example: January, 2015): ");
+		System.out.println("\nPlease enter start date of employment in format (example: January, 2015): ");
 		String joiningDate = sc.nextLine();
-		System.out.println("Please enter today's date in format (example: March, 2018): ");
+		System.out.println("Please enter end date of employment in format (example: March, 2018): ");
 		String todaysDate = sc.nextLine();
         String convertedJoiningDate = DateConversion.convertDate(joiningDate);
         String convertedTodaysDate = DateConversion.convertDate(todaysDate);
