@@ -40,6 +40,7 @@ package json.parser;
     import com.google.gson.JsonElement;
     import com.google.gson.JsonObject;
     import com.google.gson.JsonParser;
+    import com.mongodb.*;
     import databases.ConnectToSqlDB;
 
     import java.io.InputStream;
@@ -65,8 +66,8 @@ package json.parser;
             List<String> listofurlm = new ArrayList();
             List<String> listofpub = new ArrayList();
             List<String> listofcon = new ArrayList();
-            Map<String, List<String>> map = new HashMap<>();
 
+            Map<String, List<String>> map = new HashMap<>();
 
             try {
 
@@ -101,24 +102,31 @@ package json.parser;
                     String a = jsonobject.get("author").toString();
                     System.out.print(a);
                     listofa.add(a);
+
                     String t = jsonobject.get("title").toString();
                     System.out.print(t);
                     listoft.add(t);
+
                     String des = jsonobject.get("description").toString();
                     System.out.print(des);
                     listofdes.add(des);
+
                     String url = jsonobject.get("url").toString();
                     System.out.print(url);
                     listofurl.add(url);
+
                     String urlm = jsonobject.get("urlToImage").toString();
                     System.out.print(urlm);
                     listofurlm.add(urlm);
+
                     String pub = jsonobject.get("publishedAt").toString();
                     System.out.print(pub);
                     listofpub.add(pub);
+
                     String con = jsonobject.get("content").toString();
                     System.out.print(con);
                     listofcon.add(con);
+
                     System.out.println();
                     map.put("all_id", listofid);
                     map.put("all_name", listofname);
@@ -147,7 +155,7 @@ package json.parser;
             List l8 = listofpub;
             List l9 = listofcon;
 
-            ConnectToSqlDB connectToSqlDB = new ConnectToSqlDB();
+           /* ConnectToSqlDB connectToSqlDB = new ConnectToSqlDB();
             // Inserting Data into MySql
             connectToSqlDB.insertDataFromArrayListToSqlTableforString(l1, "view1", "data");
             connectToSqlDB.insertDataFromArrayListToSqlTableforString(l2, "view2", "data");
@@ -167,7 +175,29 @@ package json.parser;
             System.out.println(connectToSqlDB.readDataBase("view6", "data"));
             System.out.println(connectToSqlDB.readDataBase("view7", "data"));
             System.out.println(connectToSqlDB.readDataBase("view8", "data"));
-            System.out.println(connectToSqlDB.readDataBase("view9", "data"));
+            System.out.println(connectToSqlDB.readDataBase("view9", "data"));*/
+
+            // Inserting Map Data into MongoDB & retrieving from there.
+            try{
+
+                Mongo mongo = new Mongo("localhost", 27017);
+                DB db = mongo.getDB("students");
+                DBCollection collection = db.getCollection("CNN");
+
+                System.out.println("Database Connected!");
+
+                BasicDBObject document = new BasicDBObject();
+                collection.insert(new BasicDBObject(map));
+                DBCursor cursorDocMap = collection.find();
+
+                while (cursorDocMap.hasNext()) {
+                    System.out.println(cursorDocMap.next());
+                }
+
+            }catch(Exception e){
+
+            }
+
         }
-        }
+    }
 
